@@ -1,12 +1,15 @@
 package nz.ac.wgtn.swen301.resthome4logs.server;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.HashMap;
 
 import javax.servlet.ServletException;
+import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import org.apache.poi.xssf.usermodel.*;
 import org.json.JSONObject;
 
@@ -59,7 +62,10 @@ public class StatsXLSServlet extends HttpServlet{
 		}
 		
 		resp.setContentType("application/vnd.ms-excel");
-		resp.getWriter().print(spreadsheet.toString());
+		ServletOutputStream out = resp.getOutputStream();
+		spreadsheet.write(out);
+		out.close();
+		
 		
 	}
 
