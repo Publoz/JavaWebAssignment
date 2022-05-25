@@ -21,5 +21,21 @@
       <servlet-name>StatsCSVServlet</servlet-name>
       <url-pattern>/statscsv</url-pattern>
   </servlet-mapping>
+  <servlet>
+      <servlet-name>StatsXLSServlet</servlet-name>
+      <servlet-class>nz.ac.wgtn.swen301.resthome4logs.server.StatsXLSServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+      <servlet-name>StatsXLSServlet</servlet-name>
+      <url-pattern>/statsxls</url-pattern>
+  </servlet-mapping>
+  <servlet>
+      <servlet-name>StatsServlet</servlet-name>
+      <servlet-class>nz.ac.wgtn.swen301.resthome4logs.server.StatsServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+      <servlet-name>StatsServlet</servlet-name>
+      <url-pattern>/stats</url-pattern>
+  </servlet-mapping>
   
 </web-app>

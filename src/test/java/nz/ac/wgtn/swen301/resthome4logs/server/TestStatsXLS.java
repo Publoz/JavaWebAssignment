@@ -61,11 +61,11 @@ Persistency.logs.clear();
 		sxs.doGet(request, response);
 		
 		assertTrue(response.getStatus() == 200);
-		assertTrue(response.getContentType().equals("application/vnd.ms-excel"));
+		assertTrue(response.getContentType().equals("application-vnd.ms-excel"));
 		
 		String content = response.getContentAsString();
 		
-		//System.out.println(content);
+		System.out.println(content);
 		
 		
 		
