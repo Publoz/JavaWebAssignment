@@ -18,7 +18,7 @@ public class TestStatsXLS {
 	@Test
 	public void test_StatsXLS1() throws ServletException, IOException {
 		
-Persistency.logs.clear();
+		Persistency.logs.clear();
 		
 		MockHttpServletRequest request = new MockHttpServletRequest();
 		MockHttpServletResponse response = new MockHttpServletResponse();

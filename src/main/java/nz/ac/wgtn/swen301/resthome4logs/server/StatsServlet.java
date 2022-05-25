@@ -19,11 +19,14 @@ public class StatsServlet extends HttpServlet{
 		
 		resp.setContentType("text/html");
 		
+		out.print("<html>");
 		out.print("<table>");
+		out.print("<thead>");
 		out.print("<tr>");
 		out.print("<th>logger</th><th>ALL</th><th>TRACE</th><th>DEBUG</th>"
 				+ "<th>INFO</th><th>WARN</th><th>ERROR</th><th>FATAL</th><th>OFF</th>");
 		out.print("</tr>");
+		out.print("</thead>");
 		
 		HashMap<String, Integer[]> loggerCounts = new HashMap<String, Integer[]>();
 		for(JSONObject jo: Persistency.logs) {
@@ -35,7 +38,7 @@ public class StatsServlet extends HttpServlet{
 			int index = Persistency.getLevel(jo.getString("level"));
 			arr[index] += 1;
 		}
-		
+		out.print("<tbody>");
 		for(String key: loggerCounts.keySet()) {
 			Integer[] arr = loggerCounts.get(key);
 			out.print("<tr>");
@@ -51,8 +54,9 @@ public class StatsServlet extends HttpServlet{
 			}
 			out.print("</tr>");
 		}
-		
+		out.print("</tbody>");
 		out.print("</table>");
+		out.print("</html>");
 	}
 
 }
