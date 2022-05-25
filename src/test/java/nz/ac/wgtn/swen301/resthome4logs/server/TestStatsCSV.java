@@ -98,8 +98,7 @@ public class TestStatsCSV {
 			fail();
 		}
 		
-		System.out.println(Arrays.toString(tatumLine));
-		System.out.println(Arrays.toString(jeffLine));
+	
 		assertTrue(Integer.valueOf(tatumLine[8]).equals(1));
 		assertTrue(Integer.valueOf(jeffLine[2]).equals(2));
 		assertTrue(Integer.valueOf(tatumLine[3]).equals(0));
