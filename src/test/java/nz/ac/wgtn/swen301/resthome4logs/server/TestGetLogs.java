@@ -26,6 +26,8 @@ public class TestGetLogs {
 	@Test
 	public void test_GetLogs1() throws ServletException, IOException {
 		
+		Persistency.logs.clear();
+		
 		MockHttpServletRequest request = new MockHttpServletRequest();
 		MockHttpServletResponse response = new MockHttpServletResponse();
 		
@@ -34,7 +36,7 @@ public class TestGetLogs {
 		
 		
 		LogsServlet ls = new LogsServlet();
-		Persistency p = new Persistency();
+	
 		
 		
 		JSONObject log1 = new JSONObject();
@@ -45,7 +47,7 @@ public class TestGetLogs {
 		log1.put("logger", "loggerJeff");
 		log1.put("level", "DEBUG");
 		
-		p.logs.add(log1);
+		Persistency.logs.add(log1);
 		
 		JSONObject log2 = new JSONObject();
 		log2.put("id", "jeffrey");
@@ -55,7 +57,7 @@ public class TestGetLogs {
 		log2.put("logger", "loggerJeff");
 		log2.put("level", "INFO");
 		
-		p.logs.add(log2);
+		Persistency.logs.add(log2);
 		
 		JSONObject log3 = new JSONObject();
 		log3.put("id", "jeffrey");
@@ -65,7 +67,7 @@ public class TestGetLogs {
 		log3.put("logger", "loggerJeff");
 		log3.put("level", "WARN");
 		
-		p.logs.add(log3);
+		Persistency.logs.add(log3);
 		
 		JSONObject log4 = new JSONObject();
 		log4.put("id", "jeffrey");
@@ -75,7 +77,7 @@ public class TestGetLogs {
 		log4.put("logger", "loggerJeff");
 		log4.put("level", "WARN");
 		
-		p.logs.add(log4);
+		Persistency.logs.add(log4);
 		
 		
 		ls.doGet(request, response);
@@ -99,6 +101,7 @@ public class TestGetLogs {
 	 */
 	@Test
 	public void test_GetLogs2() throws ServletException, IOException {
+		Persistency.logs.clear();
 		MockHttpServletRequest request = new MockHttpServletRequest();
 		MockHttpServletResponse response = new MockHttpServletResponse();
 		
@@ -107,7 +110,7 @@ public class TestGetLogs {
 		
 		
 		LogsServlet ls = new LogsServlet();
-		Persistency p = new Persistency();
+	
 		JSONObject log1 = new JSONObject();
 		log1.put("id", "jeffrey");
 		log1.put("message", "I am a log yo");
@@ -116,7 +119,7 @@ public class TestGetLogs {
 		log1.put("logger", "loggerJeff");
 		log1.put("level", "DEBUG");
 		
-		p.logs.add(log1);
+		Persistency.logs.add(log1);
 		ls.doGet(request, response);
 		
 		assertEquals(400, response.getStatus());
@@ -130,13 +133,14 @@ public class TestGetLogs {
 	 */
 	@Test
 	public void test_GetLogs3() throws ServletException, IOException {
+		Persistency.logs.clear();
 		MockHttpServletRequest request = new MockHttpServletRequest();
 		MockHttpServletResponse response = new MockHttpServletResponse();
 	
 		
 		
 		LogsServlet ls = new LogsServlet();
-		Persistency p = new Persistency();
+		
 		JSONObject log1 = new JSONObject();
 		log1.put("id", "jeffrey");
 		log1.put("message", "I am a log yo");
@@ -145,7 +149,7 @@ public class TestGetLogs {
 		log1.put("logger", "loggerJeff");
 		log1.put("level", "DEBUG");
 		
-		p.logs.add(log1);
+		Persistency.logs.add(log1);
 		ls.doGet(request, response);
 		
 		assertEquals(400, response.getStatus());
@@ -160,6 +164,7 @@ public class TestGetLogs {
 	@Test
 	public void test_GetLogs4() throws ServletException, IOException {
 		
+		Persistency.logs.clear();
 		MockHttpServletRequest request = new MockHttpServletRequest();
 		MockHttpServletResponse response = new MockHttpServletResponse();
 		
@@ -168,7 +173,7 @@ public class TestGetLogs {
 		
 		
 		LogsServlet ls = new LogsServlet();
-		Persistency p = new Persistency();
+	
 		
 		
 		JSONObject log1 = new JSONObject();
@@ -179,7 +184,7 @@ public class TestGetLogs {
 		log1.put("logger", "loggerJeff");
 		log1.put("level", "DEBUG");
 		
-		p.logs.add(log1);
+		Persistency.logs.add(log1);
 		
 		JSONObject log2 = new JSONObject();
 		log2.put("id", "jeffrey");
@@ -189,7 +194,7 @@ public class TestGetLogs {
 		log2.put("logger", "loggerJeff");
 		log2.put("level", "INFO");
 		
-		p.logs.add(log2);
+		Persistency.logs.add(log2);
 		
 		JSONObject log3 = new JSONObject();
 		log3.put("id", "jeffrey");
@@ -199,7 +204,7 @@ public class TestGetLogs {
 		log3.put("logger", "loggerJeff");
 		log3.put("level", "FATAL");
 		
-		p.logs.add(log3);
+		Persistency.logs.add(log3);
 		
 		JSONObject log4 = new JSONObject();
 		log4.put("id", "jeffrey");
@@ -209,7 +214,7 @@ public class TestGetLogs {
 		log4.put("logger", "loggerJeff");
 		log4.put("level", "ERROR");
 		
-		p.logs.add(log4);
+		Persistency.logs.add(log4);
 		
 		
 		ls.doGet(request, response);
@@ -230,6 +235,7 @@ public class TestGetLogs {
 	 */
 	@Test
 	public void test_GetLogs5() throws ServletException, IOException {
+		Persistency.logs.clear();
 		MockHttpServletRequest request = new MockHttpServletRequest();
 		MockHttpServletResponse response = new MockHttpServletResponse();
 		
@@ -238,7 +244,7 @@ public class TestGetLogs {
 		
 		
 		LogsServlet ls = new LogsServlet();
-		Persistency p = new Persistency();
+		
 		JSONObject log1 = new JSONObject();
 		log1.put("id", "jeffrey");
 		log1.put("message", "I am a log yo");
@@ -247,7 +253,7 @@ public class TestGetLogs {
 		log1.put("logger", "loggerJeff");
 		log1.put("level", "DEBUG");
 		
-		p.logs.add(log1);
+		Persistency.logs.add(log1);
 		ls.doGet(request, response);
 		
 		assertEquals(400, response.getStatus());
@@ -261,6 +267,7 @@ public class TestGetLogs {
 	 */
 	@Test
 	public void test_GetLogs6() throws ServletException, IOException {
+		Persistency.logs.clear();
 		MockHttpServletRequest request = new MockHttpServletRequest();
 		MockHttpServletResponse response = new MockHttpServletResponse();
 		
@@ -269,7 +276,7 @@ public class TestGetLogs {
 		
 		
 		LogsServlet ls = new LogsServlet();
-		Persistency p = new Persistency();
+	
 		JSONObject log1 = new JSONObject();
 		log1.put("id", "jeffrey");
 		log1.put("message", "I am a log yo");
@@ -278,7 +285,7 @@ public class TestGetLogs {
 		log1.put("logger", "loggerJeff");
 		log1.put("level", "DEBUG");
 		
-		p.logs.add(log1);
+		Persistency.logs.add(log1);
 		ls.doGet(request, response);
 		
 		assertEquals(400, response.getStatus());
