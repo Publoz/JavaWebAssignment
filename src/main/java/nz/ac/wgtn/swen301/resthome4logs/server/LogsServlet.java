@@ -13,7 +13,8 @@ public class LogsServlet extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-		
+		//http://localhost:8080/resthome4logs/logs?level=ALL&limit=2
+		//example valid url
 		
 		String limit = req.getParameter("limit");
 		String level = req.getParameter("level");
@@ -83,12 +84,13 @@ public class LogsServlet extends HttpServlet{
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		super.doPost(req, resp);
+		
+		
 	}
 
 	@Override
 	protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		super.doDelete(req, resp);
+		Persistency.delete();
 	}
 
 }

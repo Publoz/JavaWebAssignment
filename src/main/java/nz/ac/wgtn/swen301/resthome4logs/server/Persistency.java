@@ -55,4 +55,8 @@ public class Persistency {
 		}
 	}
 	
+	public static void delete() {
+		logs.clear();
+	}
+	
 }
