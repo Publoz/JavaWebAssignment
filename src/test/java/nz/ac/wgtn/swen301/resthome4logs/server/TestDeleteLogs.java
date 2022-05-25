@@ -45,7 +45,7 @@ public class TestDeleteLogs {
 		ls.doDelete(request, response);
 		
 		assertTrue(Persistency.logs.size() == 0);
-		
+		assertTrue(response.getStatus() == 200);
 		
 	}
 	
