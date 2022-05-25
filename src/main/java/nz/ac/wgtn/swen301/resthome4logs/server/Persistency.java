@@ -36,17 +36,17 @@ public class Persistency {
 		switch (level) {
 		case "ALL":
 			return 0;
-		case "DEBUG":
-			return 1;
-		case "INFO":
-			return 2;
-		case "WARN":
-			return 3;
-		case "ERROR":
-			return 4;
-		case "FATAL":
-			return 5;
 		case "TRACE":
+			return 1;
+		case "DEBUG":
+			return 2;
+		case "INFO":
+			return 3;
+		case "WARN":
+			return 4;
+		case "ERROR":
+			return 5;
+		case "FATAL":
 			return 6;
 		case "OFF":
 			return 7;

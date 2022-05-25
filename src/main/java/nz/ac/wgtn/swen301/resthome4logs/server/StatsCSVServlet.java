@@ -26,7 +26,7 @@ public class StatsCSVServlet extends HttpServlet{
 		for(JSONObject jo: Persistency.logs) {
 			String logger = jo.getString("logger");
 			if(loggerCounts.get(logger) == null) {
-				loggerCounts.put(logger, new Integer[7]);
+				loggerCounts.put(logger, new Integer[]{0, 0, 0, 0, 0, 0, 0, 0});
 			}
 			Integer[] arr = loggerCounts.get(logger);
 			int index = Persistency.getLevel(jo.getString("level"));
@@ -37,7 +37,13 @@ public class StatsCSVServlet extends HttpServlet{
 			Integer[] arr = loggerCounts.get(key);
 			out.print(key);
 			for(int i = 0; i < 8; i++) {
-				out.print("\t" + arr[i]);
+				int val;
+				if(arr[i] == null) {
+					val = 0;
+				} else {
+					val = arr[i];
+				}
+				out.print("\t" + val);
 			}
 			out.print("\n");
 		}
