@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 public class LogsServlet extends HttpServlet{
@@ -94,15 +95,20 @@ public class LogsServlet extends HttpServlet{
 		}
 		
 		JSONObject log = new JSONObject(data.toString());
-		if(log.getString("id") == null || log.getString("message") == null
-				|| log.getString("timestamp") == null || log.getString("thread") == null
-				|| log.getString("logger") == null || log.getString("level") == null) {
+		try {
+			if(log.getString("id") == null || log.getString("message") == null
+					|| log.getString("timestamp") == null || log.getString("thread") == null
+					|| log.getString("logger") == null || log.getString("level") == null) {
+				resp.sendError(HttpServletResponse.SC_BAD_REQUEST);
+				return;
+			} else if(Persistency.hasId(log.get("id").toString())) {
+				resp.sendError(HttpServletResponse.SC_CONFLICT);
+				return;
+			} 
+		} catch (JSONException e){
 			resp.sendError(HttpServletResponse.SC_BAD_REQUEST);
 			return;
-		} else if(Persistency.hasId(log.get("id").toString())) {
-			resp.sendError(HttpServletResponse.SC_CONFLICT);
-			return;
-		} 
+		}
 		
 		try {
 			getLevel(log.getString("level"));
