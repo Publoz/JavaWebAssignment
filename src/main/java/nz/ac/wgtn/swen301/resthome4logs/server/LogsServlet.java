@@ -1,5 +1,6 @@
 package nz.ac.wgtn.swen301.resthome4logs.server;
 
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
 
@@ -7,6 +8,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import org.json.JSONObject;
 
 public class LogsServlet extends HttpServlet{
 
@@ -82,8 +85,34 @@ public class LogsServlet extends HttpServlet{
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		super.doPost(req, resp);
+		BufferedReader br = req.getReader();
+		StringBuffer data = new StringBuffer();
+		String line = br.readLine();
+		while(line != null) {
+			data.append(line);
+			line = br.readLine();
+		}
+		
+		JSONObject log = new JSONObject(data.toString());
+		if(log.getString("id") == null || log.getString("message") == null
+				|| log.getString("timestamp") == null || log.getString("thread") == null
+				|| log.getString("logger") == null || log.getString("level") == null) {
+			resp.sendError(HttpServletResponse.SC_BAD_REQUEST);
+			return;
+		} else if(Persistency.hasId(log.get("id").toString())) {
+			resp.sendError(HttpServletResponse.SC_CONFLICT);
+			return;
+		} 
+		
+		try {
+			getLevel(log.getString("level"));
+		} catch (IllegalArgumentException e) {
+			resp.sendError(HttpServletResponse.SC_BAD_REQUEST);
+			return;
+		}
+		
+		Persistency.logs.add(log);
+		resp.setStatus(HttpServletResponse.SC_CREATED);
 		
 		
 	}

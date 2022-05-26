@@ -32,6 +32,15 @@ public class Persistency {
 		return arr;
 	}
 	
+	public static boolean hasId(String id) {
+		for(JSONObject jo: logs) {
+			if(jo.get("id").equals(id)) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
 	public static int getLevel(String level) {
 		switch (level) {
 		case "ALL":
