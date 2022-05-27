@@ -62,6 +62,8 @@ public class StatsXLSServlet extends HttpServlet{
 		}
 		
 		resp.setContentType("application-vnd.ms-excel");
+		resp.setHeader("Content-disposition", "attachment; filename=StatsExcel.xls");
+		
 		ServletOutputStream out = resp.getOutputStream();
 		spreadsheet.write(out);
 		out.close();

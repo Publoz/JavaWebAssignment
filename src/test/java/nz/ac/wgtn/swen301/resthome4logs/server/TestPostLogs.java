@@ -100,7 +100,7 @@ public class TestPostLogs {
 		log.put("message", "I am a log");
 		log.put("timestamp", "14-03-2001 16:31:57");
 		log.put("thread", "main");
-		log.put("logga", "loggerJeff");
+		log.put("logger", "loggerJeff");
 		log.put("level", "DEBUGGY");
 		
 	
