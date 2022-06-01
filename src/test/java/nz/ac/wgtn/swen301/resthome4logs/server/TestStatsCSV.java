@@ -22,7 +22,7 @@ public class TestStatsCSV {
 	
 	@Test
 	public void test_StatsCSV1() throws ServletException, IOException {
-		Persistency.logs.clear();
+		Persistency.DB.clear();
 		
 		MockHttpServletRequest request = new MockHttpServletRequest();
 		MockHttpServletResponse response = new MockHttpServletResponse();
@@ -40,7 +40,7 @@ public class TestStatsCSV {
 		log1.put("logger", "loggerJeff");
 		log1.put("level", "TRACE");
 		
-		Persistency.logs.add(log1);
+		Persistency.DB.add(log1);
 		
 		JSONObject log2 = new JSONObject();
 		log2.put("id", "jeffrey");
@@ -50,7 +50,7 @@ public class TestStatsCSV {
 		log2.put("logger", "loggerJeff");
 		log2.put("level", "TRACE");
 		
-		Persistency.logs.add(log2);
+		Persistency.DB.add(log2);
 		
 		JSONObject log3 = new JSONObject();
 		log3.put("id", "jeffrey");
@@ -60,7 +60,7 @@ public class TestStatsCSV {
 		log3.put("logger", "loggerTatum");
 		log3.put("level", "OFF");
 		
-		Persistency.logs.add(log3);
+		Persistency.DB.add(log3);
 		
 		scs.doGet(request, response);
 		
@@ -97,11 +97,21 @@ public class TestStatsCSV {
 		} else {
 			fail();
 		}
+		assertTrue(tatumLine.length == 9);
+		assertTrue(jeffLine.length == 9);
 		
-	
-		assertTrue(Integer.valueOf(tatumLine[8]).equals(1));
-		assertTrue(Integer.valueOf(jeffLine[2]).equals(2));
-		assertTrue(Integer.valueOf(tatumLine[3]).equals(0));
+		assertEquals(Integer.valueOf(1), Integer.valueOf(tatumLine[8]));
+		assertEquals(Integer.valueOf(2), Integer.valueOf(jeffLine[2]));
+		
+		for(int i = 1; i < 8; i++) {
+			assertEquals(Integer.valueOf(0), Integer.valueOf(tatumLine[i]));
+		}
+		for(int i = 3; i < 9; i++) {
+			assertEquals(Integer.valueOf(0), Integer.valueOf(jeffLine[i]));
+		}
+		
+		assertEquals(Integer.valueOf(0), Integer.valueOf(jeffLine[1]));
+		
 		
 		
 		

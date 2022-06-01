@@ -26,7 +26,7 @@ public class TestPostLogs {
 	 */
 	@Test
 	public void test_PostLogs1() throws ServletException, IOException {
-		Persistency.logs.clear();
+		Persistency.DB.clear();
 		
 		MockHttpServletRequest request = new MockHttpServletRequest();
 		MockHttpServletResponse response = new MockHttpServletResponse();
@@ -47,7 +47,7 @@ public class TestPostLogs {
 		
 		ls.doPost(request, response);
 		assertTrue(response.getStatus() == 201);
-		assertTrue(Persistency.logs.size() == 1);
+		assertTrue(Persistency.DB.size() == 1);
 	}
 	
 	/**
@@ -58,7 +58,7 @@ public class TestPostLogs {
 	 */
 	@Test
 	public void test_PostLogs2() throws ServletException, IOException {
-		Persistency.logs.clear();
+		Persistency.DB.clear();
 		
 		MockHttpServletRequest request = new MockHttpServletRequest();
 		MockHttpServletResponse response = new MockHttpServletResponse();
@@ -89,7 +89,7 @@ public class TestPostLogs {
 	 */
 	@Test
 	public void test_PostLogs3() throws ServletException, IOException {
-		Persistency.logs.clear();
+		Persistency.DB.clear();
 		
 		MockHttpServletRequest request = new MockHttpServletRequest();
 		MockHttpServletResponse response = new MockHttpServletResponse();
@@ -120,7 +120,7 @@ public class TestPostLogs {
 	 */
 	@Test
 	public void test_PostLogs4() throws ServletException, IOException {
-		Persistency.logs.clear();
+		Persistency.DB.clear();
 		
 		MockHttpServletRequest request = new MockHttpServletRequest();
 		MockHttpServletResponse response = new MockHttpServletResponse();

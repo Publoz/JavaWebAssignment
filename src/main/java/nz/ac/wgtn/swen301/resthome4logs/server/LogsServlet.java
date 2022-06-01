@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -57,25 +58,57 @@ public class LogsServlet extends HttpServlet{
 		
 		resp.setContentType("application/json");
 		
-		out.print(Persistency.getLogs(levelNum, num));
+		out.print(getLogs(levelNum, num));
 
 	}
 	
-	private int getLevel(String level) {
+	
+	private JSONArray getLogs(int level, int num){
+		
+		
+		JSONArray arr = new JSONArray(); 
+		int count = 0;
+		
+		
+		for(int i = Persistency.DB.size() - 1; i >= 0; i--) {
+			if(getLevel(Persistency.DB.get(i).getString("level")) >= level) {
+				arr.put(Persistency.DB.get(i));
+				count++;
+				if(count >= num) {
+					break;
+				}
+			}
+		}
+		
+		return arr;
+	}
+	
+
+	
+	private boolean hasId(String id) {
+		for(JSONObject jo: Persistency.DB) {
+			if(jo.get("id").equals(id)) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	public static int getLevel(String level) {
 		switch (level) {
 		case "ALL":
 			return 0;
-		case "DEBUG":
-			return 1;
-		case "INFO":
-			return 2;
-		case "WARN":
-			return 3;
-		case "ERROR":
-			return 4;
-		case "FATAL":
-			return 5;
 		case "TRACE":
+			return 1;
+		case "DEBUG":
+			return 2;
+		case "INFO":
+			return 3;
+		case "WARN":
+			return 4;
+		case "ERROR":
+			return 5;
+		case "FATAL":
 			return 6;
 		case "OFF":
 			return 7;
@@ -101,7 +134,7 @@ public class LogsServlet extends HttpServlet{
 					|| log.getString("logger") == null || log.getString("level") == null) {
 				resp.sendError(HttpServletResponse.SC_BAD_REQUEST);
 				return;
-			} else if(Persistency.hasId(log.get("id").toString())) {
+			} else if(hasId(log.get("id").toString())) {
 				resp.sendError(HttpServletResponse.SC_CONFLICT);
 				return;
 			} 
@@ -117,7 +150,7 @@ public class LogsServlet extends HttpServlet{
 			return;
 		}
 		
-		Persistency.logs.add(log);
+		Persistency.DB.add(log);
 		resp.setStatus(HttpServletResponse.SC_CREATED);
 		
 		
@@ -125,7 +158,7 @@ public class LogsServlet extends HttpServlet{
 
 	@Override
 	protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		Persistency.delete();
+		Persistency.DB.clear();;
 	}
 
 }

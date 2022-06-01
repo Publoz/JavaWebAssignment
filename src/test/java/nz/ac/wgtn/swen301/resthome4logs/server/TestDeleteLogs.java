@@ -26,7 +26,7 @@ public class TestDeleteLogs {
 	
 		LogsServlet ls = new LogsServlet();
 		
-		Persistency.logs.clear();
+		Persistency.DB.clear();
 		
 		
 		JSONObject log1 = new JSONObject();
@@ -37,14 +37,14 @@ public class TestDeleteLogs {
 		log1.put("logger", "loggerJeff");
 		log1.put("level", "DEBUG");
 		
-		Persistency.logs.add(log1);
+		Persistency.DB.add(log1);
 		
-		System.out.println(Persistency.logs.size());
-		assertEquals(1, Persistency.logs.size());
+		System.out.println(Persistency.DB.size());
+		assertEquals(1, Persistency.DB.size());
 		
 		ls.doDelete(request, response);
 		
-		assertTrue(Persistency.logs.size() == 0);
+		assertTrue(Persistency.DB.size() == 0);
 		assertTrue(response.getStatus() == 200);
 		
 	}

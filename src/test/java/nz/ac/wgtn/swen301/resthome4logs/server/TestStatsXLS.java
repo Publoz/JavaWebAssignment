@@ -29,7 +29,7 @@ public class TestStatsXLS {
 	@Test
 	public void test_StatsXLS1() throws ServletException, IOException, ClassNotFoundException {
 		
-		Persistency.logs.clear();
+		Persistency.DB.clear();
 		
 		MockHttpServletRequest request = new MockHttpServletRequest();
 		MockHttpServletResponse response = new MockHttpServletResponse();
@@ -47,7 +47,7 @@ public class TestStatsXLS {
 		log1.put("logger", "loggerJeff");
 		log1.put("level", "TRACE");
 		
-		Persistency.logs.add(log1);
+		Persistency.DB.add(log1);
 		
 		JSONObject log2 = new JSONObject();
 		log2.put("id", "jeffrey");
@@ -57,7 +57,7 @@ public class TestStatsXLS {
 		log2.put("logger", "loggerJeff");
 		log2.put("level", "TRACE");
 		
-		Persistency.logs.add(log2);
+		Persistency.DB.add(log2);
 		
 		JSONObject log3 = new JSONObject();
 		log3.put("id", "jeffrey");
@@ -67,7 +67,7 @@ public class TestStatsXLS {
 		log3.put("logger", "loggerTatum");
 		log3.put("level", "OFF");
 		
-		Persistency.logs.add(log3);
+		Persistency.DB.add(log3);
 		
 		sxs.doGet(request, response);
 		

@@ -34,13 +34,13 @@ public class StatsXLSServlet extends HttpServlet{
 		firstLine.createCell(8).setCellValue("OFF");
 		
 		HashMap<String, Integer[]> loggerCounts = new HashMap<String, Integer[]>();
-		for(JSONObject jo: Persistency.logs) {
+		for(JSONObject jo: Persistency.DB) {
 			String logger = jo.getString("logger");
 			if(loggerCounts.get(logger) == null) {
 				loggerCounts.put(logger, new Integer[]{0, 0, 0, 0, 0, 0, 0, 0});
 			}
 			Integer[] arr = loggerCounts.get(logger);
-			int index = Persistency.getLevel(jo.getString("level"));
+			int index = LogsServlet.getLevel(jo.getString("level"));
 			arr[index] += 1;
 		}
 		

@@ -26,7 +26,7 @@ public class TestStatsHTML {
 	
 	@Test
 	public void test_StatsHTML1() throws ServletException, IOException {
-		Persistency.logs.clear();
+		Persistency.DB.clear();
 		
 		MockHttpServletRequest request = new MockHttpServletRequest();
 		MockHttpServletResponse response = new MockHttpServletResponse();
@@ -44,7 +44,7 @@ public class TestStatsHTML {
 		log1.put("logger", "loggerJeff");
 		log1.put("level", "TRACE");
 		
-		Persistency.logs.add(log1);
+		Persistency.DB.add(log1);
 		
 		JSONObject log2 = new JSONObject();
 		log2.put("id", "jeffrey");
@@ -54,7 +54,7 @@ public class TestStatsHTML {
 		log2.put("logger", "loggerJeff");
 		log2.put("level", "TRACE");
 		
-		Persistency.logs.add(log2);
+		Persistency.DB.add(log2);
 		
 		JSONObject log3 = new JSONObject();
 		log3.put("id", "jeffrey");
@@ -64,7 +64,7 @@ public class TestStatsHTML {
 		log3.put("logger", "loggerTatum");
 		log3.put("level", "OFF");
 		
-		Persistency.logs.add(log3);
+		Persistency.DB.add(log3);
 		
 		ss.doGet(request, response);
 		
@@ -98,11 +98,20 @@ public class TestStatsHTML {
 		Element jeffRow = rows.get(0);
 		assertTrue(jeffRow.child(0).text().equals("loggerJeff"));
 		assertTrue(jeffRow.child(2).text().equals("2"));
-		assertTrue(jeffRow.child(5).text().equals("0"));
+		for(int i = 3; i < 9; i++) {
+			assertTrue(jeffRow.child(i).text().equals("0"));
+		}
+		assertTrue(jeffRow.child(1).text().equals("0"));
+		
 		
 		Element tatRow = rows.get(1);
 		assertTrue(tatRow.child(0).text().equals("loggerTatum"));
-		assertTrue(tatRow.child(3).text().equals("0"));
+		
+		
+		for(int i = 1; i < 8; i++) {
+			assertTrue(tatRow.child(i).text().equals("0"));
+		}
+		
 		assertTrue(tatRow.child(8).text().equals("1"));
 		
 	}
